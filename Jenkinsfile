@@ -1,6 +1,25 @@
-//groovy script
-pipeline {
+node { //single
+  stage('SCM Checkout') {
+    git branch: 'dev', credentialsId: 'global', url: 'https://github.com/QuangNguyenHuu/serenity-bdd-test.git'
+    //git(credentialsId: 'global', url: 'https://github.com/QuangNguyenHuu/serenity-bdd-test.git', branch 'feature')
+  }
+  
+  stage('Build project using MVN') {
+    steps {
+      echo 'Instruction MVN'
+        //script {
+          def mvnHome = tool name: 'maven-3', type: 'maven'
+          def mvnCmd = "${vmnHome/bin/mvn}"
+          sh "${mvnCmd} clean package"
+        //}
+      echo '[FINISH] Maven'
+    }
+  }
+}
 
+/*
+//groovy script
+pipeline { //multi
   agent('SCM Checkout') {
     git branch: 'dev', credentialsId: 'global', url: 'https://github.com/QuangNguyenHuu/serenity-bdd-test.git'
     //git(credentialsId: 'global', url: 'https://github.com/QuangNguyenHuu/serenity-bdd-test.git', branch 'feature')
@@ -18,7 +37,7 @@ pipeline {
     }
   }
   
-  /*
+  
   stage('Build Docker image') {
     sh 'docker build -t jacobalberty/unifi:latest'
   }
@@ -53,10 +72,5 @@ pipeline {
       //sh 'npm build
     echo '[FINISH] Testing build'
   }
-  */
 }
-
-node {
-      agent any
-        
-}
+*/
