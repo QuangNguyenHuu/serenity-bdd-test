@@ -9,11 +9,11 @@ pipeline {
   stage('Build project using MVN') {
     steps {
       echo 'Instruction MVN'
-        script {
+        //script {
           def mvnHome = tool name: 'maven-3', type: 'maven'
           def mvnCmd = "${vmnHome/bin/mvn}"
           sh "${mvnCmd} clean package"
-        }
+        //}
       echo '[FINISH] Maven'
     }
   }
