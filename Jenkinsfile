@@ -8,10 +8,12 @@ node { //single
     steps {
       echo 'Instruction MVN'
         script {
-          def mvnHome = tool name: 'maven-3', type: 'maven'
-          def mvnCmd = "${vmnHome/bin/mvn}"
-          sh "${mvnCmd} clean package"
+          def testIf = 1+1 = 2 ? true : false
         }
+      
+        def mvnHome = tool name: 'maven-3', type: 'maven'
+        def mvnCmd = "${vmnHome/bin/mvn}"
+        sh "${mvnCmd} clean package"
       echo '[FINISH] Maven'
     }
   }
