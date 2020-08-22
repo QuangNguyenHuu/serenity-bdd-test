@@ -8,7 +8,7 @@ node { //single
     steps {
       echo 'Instruction MVN'
         script {
-          def testIf = 1+1 = 2 ? true : false
+          def testIf = 1+1 == 2 ? true : false
         }
       
         def mvnHome = tool name: 'maven-3', type: 'maven'
